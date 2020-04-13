@@ -15,8 +15,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+
+const posts=[];
+
+//home page
 app.get("/",function (req,res) {
-  res.render('home',{home_content: homeStartingContent});
+  res.render('home',{home_content: homeStartingContent,
+      new_contents: posts});
 });
 
 
@@ -24,14 +29,34 @@ app.post("/",function (req,res) {
 
 });
 
+//about page
+app.get("/about",function (req,res) {
+    res.render('about',{about_content: aboutContent});
+});
+
+//contact page
+app.get("/contact",function (req,res) {
+    res.render("contact",{contact_content: contactContent});
+});
+
+//compose page
+app.get("/compose",function (req,res) {
+    res.render("compose");
+});
+
+app.post("/compose",function (req, res) {
+
+    let new_content ={
+        title: req.body.title,
+        blogItem:req.body.message
+    };
+
+    posts.push(new_content);
+    console.log(posts);
+    res.redirect("/");
+});
 
 
-
-
-
-
-
-
-app.listen(3001, function() {
-  console.log("Server started on port 3001");
+app.listen(3000, function() {
+  console.log("Server started on port 3000");
 });
