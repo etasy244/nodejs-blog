@@ -4,8 +4,10 @@
 
 <p><%=home_content %>
 <% new_contents.forEach(function (new_content){%>
-<h1> <%= new_content.title%> </h1>
-<p>  <%= new_content.blogItem%> </p>
+        <a href="/post"><h1> <%= new_content.title%> </h1></a>
+
+<p>  <%= new_content.blogItem.substring(0,100)+"...";%> </p>
+<a href="/post/<%=new_content.title%>">Read More</a>
   <% });%>
 
 
